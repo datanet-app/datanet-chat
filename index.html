@@ -3,8 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>چت ساده</title>
+    <title>Simple Chat</title>
     <style>
+        :root {
+            --header-bg: #6B083F;
+            --header-label-bg: #510E30;
+        }
+
         body {
             font-family: sans-serif;
             background: #121212;
@@ -17,25 +22,37 @@
 
         .chat-container {
             width: 350px;
-            background: #fff;
+            background: #E4C7F1;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             min-height: 300px;
+            position: relative;
+
+            p {
+                margin: 0;
+            }
+
+            .message {
+                display: flex;
+                flex-direction: column;
+
+                background-color: #103459;
+                color: #efefef;
+
+                small {
+                    align-self: flex-end;
+                    font-size: smaller;
+                    opacity: 0.7;
+                }
+            }
         }
 
-        .chat-header {
-            padding: 10px;
-            background: #4f46e5;
-            color: white;
-            border-radius: 8px 8px 0 0;
-            text-align: center;
-        }
 
         .chat-messages {
             flex: 1;
-            padding: 10px;
+            padding: 5px 0;
             overflow-y: auto;
         }
 
@@ -53,7 +70,7 @@
         }
 
         .message.other {
-            background: #f3f4f6;
+            background: rgba(243, 244, 246, 0.532);
             align-self: flex-start;
         }
 
@@ -68,11 +85,14 @@
             border: none;
             outline: none;
             font-size: 14px;
+            caret-color: red;
+            background-color: #efefef;
+
         }
 
         .chat-input button {
             padding: 0 15px;
-            background: #4f46e5;
+            background: #8D26B9;
             color: white;
             border: none;
             cursor: pointer;
@@ -81,15 +101,187 @@
         .chat-input button:hover {
             background: #4338ca;
         }
+
+        .user-setting {
+
+            background: var(--header-bg);
+            display: none;
+
+            &.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                width: 350px;
+
+                padding: 10px;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .header-toolbar {
+            padding: 10px;
+            background: var(--header-bg);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 40px;
+        }
+
+
+        .icon-button {
+            display: flex;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+            svg {
+                width: 16px;
+                height: 16px;
+
+                path {
+                    fill: #efefef;
+                }
+            }
+        }
+
+        .cupertino-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            /* Rounded corners */
+            border: 1px solid #510869;
+            /* Light gray border */
+            background: #F5D8EE;
+            font-size: 16px;
+            color: #000;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .cupertino-input:focus {
+            border-color: #E1316A;
+            background-color: white;
+            /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(244, 163, 191, 0.2);
+        }
+
+        .cupertino-input::placeholder {
+            color: #8e8e93;
+            /* Light gray for placeholder */
+            opacity: 1;
+        }
+
+        /* Cupertino Button Styling */
+        .cupertino-button {
+            padding: 12px 24px;
+            /* Padding for the button */
+            font-size: 16px;
+            /* Font size */
+            color: white;
+            /* Text color */
+            background-color: #007aff;
+            /* Blue background (standard iOS blue) */
+            border: none;
+            /* No border */
+            border-radius: 20px;
+            /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            cursor: pointer;
+            /* Pointer cursor */
+            outline: none;
+            /* Remove outline */
+            transition: background-color 0.2s, transform 0.1s ease-in-out;
+            /* Transition for smooth effects */
+        }
+
+        /* Hover effect */
+        .cupertino-button:hover {
+            background-color: #0051cc;
+            /* Darker blue on hover */
+        }
+
+        /* Active effect */
+        .cupertino-button:active {
+            transform: scale(0.98);
+            /* Slight shrink when pressed */
+            background-color: #0041a3;
+            /* Even darker blue when clicked */
+        }
+
+        label {
+
+            color: #efefef;
+            display: flex;
+            flex-direction: column;
+
+            span {
+                border-radius: 5px;
+                padding: 0 5px;
+                margin-bottom: -10px;
+                background-color: var(--header-label-bg);
+                align-self: flex-start;
+                margin-inline-start: 10px;
+                z-index: 10;
+                font-size: smaller;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <div class="chat-container">
-        <div class="chat-header">Message Box</div>
+        <div class="chat-header header-toolbar">
+            <div>
+                chat: <span id="sender-name">----</span>
+            </div>
+            <button class="icon-button" onclick="OpenSetting()">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="4.954591751098633 4.001092910766602 38.09081840515137 39.9989070892334">
+                    <path
+                        d="M39.139,26.282C38.426,25.759,38,24.919,38,24.034s0.426-1.725,1.138-2.247l3.294-2.415c0.525-0.386,0.742-1.065,0.537-1.684c-0.848-2.548-2.189-4.872-3.987-6.909c-0.433-0.488-1.131-0.642-1.728-0.38l-3.709,1.631c-0.808,0.356-1.749,0.305-2.516-0.138c-0.766-0.442-1.28-1.23-1.377-2.109l-0.446-4.072c-0.071-0.648-0.553-1.176-1.191-1.307c-2.597-0.531-5.326-0.54-7.969-0.01c-0.642,0.129-1.125,0.657-1.196,1.308l-0.442,4.046c-0.097,0.88-0.611,1.668-1.379,2.11c-0.766,0.442-1.704,0.495-2.515,0.138l-3.729-1.64c-0.592-0.262-1.292-0.11-1.725,0.377c-1.804,2.029-3.151,4.35-4.008,6.896c-0.208,0.618,0.008,1.301,0.535,1.688l3.273,2.4C9.574,22.241,10,23.081,10,23.966s-0.426,1.725-1.138,2.247l-3.294,2.415c-0.525,0.386-0.742,1.065-0.537,1.684c0.848,2.548,2.189,4.872,3.987,6.909c0.433,0.489,1.133,0.644,1.728,0.38l3.709-1.631c0.808-0.356,1.748-0.305,2.516,0.138c0.766,0.442,1.28,1.23,1.377,2.109l0.446,4.072c0.071,0.648,0.553,1.176,1.191,1.307C21.299,43.864,22.649,44,24,44c1.318,0,2.648-0.133,3.953-0.395c0.642-0.129,1.125-0.657,1.196-1.308l0.443-4.046c0.097-0.88,0.611-1.668,1.379-2.11c0.766-0.441,1.705-0.493,2.515-0.138l3.729,1.64c0.594,0.263,1.292,0.111,1.725-0.377c1.804-2.029,3.151-4.35,4.008-6.896c0.208-0.618-0.008-1.301-0.535-1.688L39.139,26.282z M24,31c-3.866,0-7-3.134-7-7s3.134-7,7-7s7,3.134,7,7S27.866,31,24,31z">
+                    </path>
+                </svg>
+            </button>
+        </div>
 
         <div class="chat-messages" id="messages"></div>
+
+
+
+
+        <div class="user-setting active stack-panel" id="form-1a6b75a5">
+            <section class="header-toolbar">
+                <div>
+                    <span>Chat Settings</span>
+                </div>
+                <button class="icon-button" onclick="CloseSetting()">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="6.970975399017334 6.97014045715332 34.058985233306885 34.05888557434082">
+                        <path
+                            d="M38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375L24 21.171875L10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062L21.171875 24L7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062L24 26.828125L37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938L26.828125 24L40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z">
+                        </path>
+                    </svg>
+                </button>
+            </section>
+            <section>
+
+                <label>
+                    <span>Username</span>
+                    <input type="text" class="cupertino-input" id="input-4eca11e2" placeholder="UserName" />
+                </label>
+
+
+            </section>
+        </div>
 
         <div class="chat-input">
             <input type="text" id="messageInput" placeholder="Write Your Message" />
@@ -100,6 +292,7 @@
     <script>
         const messagesEl = document.getElementById('messages');
         const inputEl = document.getElementById('messageInput');
+        const txtSenderName = document.getElementById('sender-name');
 
         function PostMessage() {
             const message = inputEl.value.trim();
@@ -108,13 +301,14 @@
             addMessage(message, 'user');
             inputEl.value = '';
 
-             const formData = new FormData();
-                formData.append('message', message);
+            const formData = new FormData();
+            formData.append('message', message);
+            formData.append('sender', txtSenderName.innerText);
 
-                fetch("https://chat.mise.ir/", {
-                    method: 'POST',
-                    body: formData
-                })
+            fetch("https://chat.mise.ir/", {
+                method: 'POST',
+                body: formData
+            })
                 .then(response => response.json())
                 .then(result => {
                     if (result.status === 'success') {
@@ -124,7 +318,7 @@
                         alert(result.message);
                     }
                 })
-                .catch(error => console.error('ٍError:', error));
+                .catch(error => console.error('Error:', error));
 
             // شبیه‌سازی پاسخ طرف مقابل
             setTimeout(() => {
@@ -140,7 +334,7 @@
             messagesEl.scrollTop = messagesEl.scrollHeight;
         }
 
-       
+
 
         // ارسال با Enter
         inputEl.addEventListener('keydown', e => {
@@ -158,6 +352,50 @@
             addMessage(g, 'other');
         })
 
+
+        //>> Username
+        function generateRandomUsername() {
+            // تولید یک عدد تصادفی بین 100 و 999
+            const randomNumber = Math.floor(Math.random() * 900) + 100; // این مقدار همیشه 3 رقمی خواهد بود
+            return `user-${randomNumber}`;
+        }
+
+
+        if (sessionStorage.getItem("username"))
+            txtSenderName.innerHTML = sessionStorage.getItem("username");
+        else {
+            txtSenderName.innerHTML = generateRandomUsername();
+            sessionStorage.setItem("username", txtSenderName.innerHTML)
+        }
+
+        function OpenSetting() {
+            var form = document.getElementById("form-1a6b75a5");
+            form.classList.add("active");
+
+            var input = document.getElementById("input-4eca11e2");
+            input.value = txtSenderName.innerHTML;
+            input.focus();
+            input.select();
+
+            input.oninput = () => {
+                var txt = input.value.trim();
+                txt = txt.replace(/[^a-zA-Z0-9\s]/g, '');
+                txtSenderName.innerHTML = txt;
+                if (txt.length < 3) txtSenderName.innerHTML = "user-" + txt;
+                if (txt.length == 0) txtSenderName.innerHTML = sessionStorage.getItem("username");
+                console.log(txtSenderName.innerHTML);
+            }
+
+
+
+        }
+
+        function CloseSetting() {
+            var form = document.getElementById("form-1a6b75a5");
+            form.classList.remove("active");
+
+            sessionStorage.setItem("username", txtSenderName.innerHTML);
+        }
     </script>
 
 </body>
