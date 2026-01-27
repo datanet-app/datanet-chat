@@ -18,7 +18,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-
+            height: 100svh;
         }
 
         .chat-container {
@@ -41,11 +41,34 @@
 
                 background-color: #103459;
                 color: #efefef;
+               &:not(.merge-up){ margin-top: 15px;}
+
+                &.compact-mode {
+                    flex-direction: row;
+                    width: 300px;
+
+                    p {
+                        flex-grow: 1;
+                    }
+                }
 
                 small {
                     align-self: flex-end;
                     font-size: smaller;
                     opacity: 0.7;
+                }
+
+                &::before {
+                    background-color: #10355962;
+                    padding: 0 5px;
+                    content: attr(data-sender);
+                    position: absolute;
+                    font-size: smaller;
+                    border-radius: 5px;
+                    top: 0;
+                    left: 0;
+                    margin-top: -20px;
+                    margin-left: -10px;
                 }
             }
         }
@@ -63,6 +86,8 @@
             border-radius: 6px;
             max-width: 80%;
             font-size: 14px;
+            position: relative;
+
         }
 
         .message.user {
@@ -234,6 +259,46 @@
                 font-size: smaller;
             }
         }
+
+        .fake-link {
+            user-select: none;
+            cursor: pointer;
+            border: 1px solid var(--header-label-bg);
+        }
+
+        .seperator {
+            opacity: 0.7;
+        }
+
+        .bread-crumb {
+            display: flex;
+            align-items: center;
+
+            :not(:first-child)::before {
+                content: "/";
+                opacity: 0.5;
+            }
+        }
+
+        .merge-down {
+            margin-bottom: 0;
+            border-radius: 6px 6px 0 0;
+            padding-bottom: 0;
+
+            small {
+                display: none !important;
+            }
+        }
+
+        .merge-up {
+            margin-top: 0;
+            border-radius: 0 0 6px 6px;
+            padding-top: 0;
+
+            &::before {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -261,8 +326,9 @@
 
         <div class="user-setting stack-panel" id="form-1a6b75a5">
             <section class="header-toolbar">
-                <div>
-                    <span>Chat Settings</span>
+                <div class="bread-crumb">
+                    <span class="fake-link" onclick="CloseSetting()">🏠</span>
+                    <span>Settings</span>
                 </div>
                 <button class="icon-button" onclick="CloseSetting()">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -333,6 +399,11 @@
             msg.innerHTML = text;
             messagesEl.appendChild(msg);
             messagesEl.scrollTop = messagesEl.scrollHeight;
+
+
+            MessageOptimization(messagesEl);
+
+
         }
 
 
@@ -397,6 +468,78 @@
 
             sessionStorage.setItem("username", txtSenderName.innerHTML);
         }
+
+
+        function formatDate(dateString) {
+            const messageDate = new Date(dateString);
+            const today = new Date();
+
+            const messageDateString = messageDate.toISOString().split('T')[0];
+            const todayDateString = today.toISOString().split('T')[0];
+
+            const hours = messageDate.getHours().toString().padStart(2, '0');
+            const minutes = messageDate.getMinutes().toString().padStart(2, '0');
+
+            if (messageDateString === todayDateString) {
+                // If message is from today, show only hours and minutes
+                return `${hours}:${minutes}`;
+            } else {
+                // If message is from another day, show full date (MM-DD) and time
+                const month = (messageDate.getMonth() + 1).toString().padStart(2, '0');
+                const day = messageDate.getDate().toString().padStart(2, '0');
+                return `${month}-${day} ${hours}:${minutes}`;
+            }
+        }
+        function MessageOptimization(el) {
+            const messagesList = el.querySelectorAll('.message');
+
+            for (let i = 0; i < messagesList.length - 1; i++) {
+                const current = messagesList[i];
+                const next = messagesList[i + 1];
+
+                const sender1 = current.dataset.sender;
+                const sender2 = next.dataset.sender;
+
+
+                const time1 = new Date(current.querySelector('small').textContent);
+                const time2 = new Date(next.querySelector('small').textContent);
+
+
+
+
+                if (sender1 !== sender2) continue;
+                const diffMinutes = (time2 - time1) / (1000 * 60);
+
+                if (diffMinutes <= 10) {
+                    current.classList.add('merge-down');
+                    next.classList.add('merge-up');
+                }
+            }
+
+
+            el.querySelectorAll("small").forEach(small => {
+                const originalDate = small.textContent;
+                console.log(originalDate)
+                small.textContent = formatDate(originalDate);
+            });
+
+
+
+            const range = document.createRange();
+
+            messagesList.forEach(message => {
+
+                var pTag = message.querySelector("p");
+                range.selectNodeContents(pTag);
+                const contentWidth = range.getBoundingClientRect().width;
+
+                if (contentWidth < 200) {
+                    message.classList.add('compact-mode');
+                }
+            });
+
+
+        };
     </script>
 
 </body>
