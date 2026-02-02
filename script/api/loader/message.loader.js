@@ -1,7 +1,7 @@
 export class MessageLoader {
     OnLoadstring;
     Load() {
-        fetch("https://datanet-chat-api.onrender.com/fetch-data").then(g => g.text()).then(g => {
+        fetch("https://render-cli.datanet.live/fetch-data").then(g => g.text()).then(g => {
             if (g.startsWith("{")) {
                 return;
             }
