@@ -1,0 +1,17 @@
+label {
+
+    color: #efefef;
+    display: flex;
+    flex-direction: column;
+
+    span {
+        border-radius: 5px;
+        padding: 0 5px;
+        margin-bottom: -10px;
+        background-color: var(--header-label-bg);
+        align-self: flex-start;
+        margin-inline-start: 10px;
+        z-index: 10;
+        font-size: smaller;
+    }
+}

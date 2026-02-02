@@ -5,311 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Chat</title>
+    <link rel="stylesheet" href="./style/index.css">
+    <link rel="stylesheet" href="./style/element/form/label.css">
+    <link rel="stylesheet" href="./style/element/define/indicator-message-element.css">
+    <link rel="stylesheet" href="./style/cupertino.css">
+    <link rel="stylesheet" href="./style/setting.css">
+    <link rel="stylesheet" href="./style/header-toolbar.css">
+    <link rel="stylesheet" href="./style/panel/over-panel.css">
+    <link rel="stylesheet" href="./style/layout/mobile-layout.css">
     <style>
-        :root {
-            --header-bg: #6B083F;
-            --header-label-bg: #510E30;
-        }
-
-        body {
-            font-family: sans-serif;
-            background: #121212;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            height: 100svh;
-        }
-
-        .chat-container {
-            width: 350px;
-            background: #E4C7F1;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            min-height: 300px;
-            position: relative;
-
-            p {
-                margin: 0;
-            }
-
-            .message {
-                display: flex;
-                flex-direction: column;
-
-                background-color: #103459;
-                color: #efefef;
-               &:not(.merge-up){ margin-top: 25px;}
-
-                &.compact-mode {
-                    flex-direction: row;
-                    width: 300px;
-
-                    p {
-                        flex-grow: 1;
-                    }
-                }
-
-                small {
-                    align-self: flex-end;
-                    font-size: smaller;
-                    opacity: 0.7;
-                }
-
-                &::before {
-                    background-color: #103559;
-                    padding: 0 5px;
-                    content: attr(data-sender);
-                    position: absolute;
-                    font-size: smaller;
-                    border-radius: 5px;
-                    top: 0;
-                    left: 0;
-                    margin-top: -17px;
-                    margin-left: -10px;
-                }
-            }
-        }
-
-
-        .chat-messages {
-            flex: 1;
-            padding: 5px 0;
-            overflow-y: auto;
-        }
-
-        .message {
-            margin-bottom: 8px;
-            padding: 8px 10px;
-            border-radius: 6px;
-            max-width: 80%;
-            font-size: 14px;
-            position: relative;
-
-        }
-
-        .message.user {
-            background: #e0e7ff;
-            align-self: flex-end;
-        }
-
-        .message.other {
-            background: rgba(243, 244, 246, 0.532);
-            align-self: flex-start;
-        }
-
-        .chat-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            caret-color: red;
-            background-color: #efefef;
-
-        }
-
-        .chat-input button {
-            padding: 0 15px;
-            background: #8D26B9;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .chat-input button:hover {
-            background: #4338ca;
-        }
-
-        .user-setting {
-
-            background: var(--header-bg);
-            display: none;
-
-            &.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                width: 350px;
-
-                padding: 10px;
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        .header-toolbar {
-            padding: 10px;
-            background: var(--header-bg);
-            color: white;
-            border-radius: 8px 8px 0 0;
-            font-family: monospace;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        input-area {
             height: 40px;
-        }
-
-
-        .icon-button {
-            display: flex;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-
-            svg {
-                width: 16px;
-                height: 16px;
-
-                path {
-                    fill: #efefef;
-                }
-            }
-        }
-
-        .cupertino-input {
             width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            /* Rounded corners */
-            border: 1px solid #510869;
-            /* Light gray border */
-            background: #F5D8EE;
-            font-size: 16px;
-            color: #000;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .cupertino-input:focus {
-            border-color: #E1316A;
-            background-color: white;
-            /* Blue border on focus */
-            box-shadow: 0 0 5px rgba(244, 163, 191, 0.2);
-        }
-
-        .cupertino-input::placeholder {
-            color: #8e8e93;
-            /* Light gray for placeholder */
-            opacity: 1;
-        }
-
-        /* Cupertino Button Styling */
-        .cupertino-button {
-            padding: 12px 24px;
-            /* Padding for the button */
-            font-size: 16px;
-            /* Font size */
-            color: white;
-            /* Text color */
-            background-color: #007aff;
-            /* Blue background (standard iOS blue) */
-            border: none;
-            /* No border */
-            border-radius: 20px;
-            /* Rounded corners */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            /* Subtle shadow */
-            cursor: pointer;
-            /* Pointer cursor */
-            outline: none;
-            /* Remove outline */
-            transition: background-color 0.2s, transform 0.1s ease-in-out;
-            /* Transition for smooth effects */
-        }
-
-        /* Hover effect */
-        .cupertino-button:hover {
-            background-color: #0051cc;
-            /* Darker blue on hover */
-        }
-
-        /* Active effect */
-        .cupertino-button:active {
-            transform: scale(0.98);
-            /* Slight shrink when pressed */
-            background-color: #0041a3;
-            /* Even darker blue when clicked */
-        }
-
-        label {
-
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            left: 0;
+            display: flex;
+            background-color: rgba(255, 0, 0, 0.293);
             color: #efefef;
-            display: flex;
-            flex-direction: column;
-
-            span {
-                border-radius: 5px;
-                padding: 0 5px;
-                margin-bottom: -10px;
-                background-color: var(--header-label-bg);
-                align-self: flex-start;
-                margin-inline-start: 10px;
-                z-index: 10;
-                font-size: smaller;
-            }
-        }
-
-        .fake-link {
-            user-select: none;
-            cursor: pointer;
-            border: 1px solid var(--header-label-bg);
-        }
-
-        .seperator {
-            opacity: 0.7;
-        }
-
-        .bread-crumb {
-            display: flex;
             align-items: center;
-
-            :not(:first-child)::before {
-                content: "/";
-                opacity: 0.5;
-            }
-        }
-
-        .merge-down {
-            margin-bottom: 0;
-            border-radius: 6px 6px 0 0;
-            padding-bottom: 0;
-
-            small {
-                display: none !important;
-            }
-        }
-
-        .merge-up {
-            margin-top: 0;
-            border-radius: 0 0 6px 6px;
-            padding-top: 0;
-
-            &::before {
-                display: none !important;
-            }
+            justify-content: center;
         }
     </style>
 </head>
 
 <body>
-
-    <div class="chat-container">
+ 
+    <mobile-layout>
         <div class="chat-header header-toolbar">
             <div>
                 chat: <span id="sender-name">----</span>
             </div>
-            <button class="icon-button" onclick="OpenSetting()">
+            <button class="icon-button"  data-command="display/command" data-uid="panel-settings-open" >
                 <svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="4.954591751098633 4.001092910766602 38.09081840515137 39.9989070892334">
                     <path
@@ -324,13 +52,13 @@
 
 
 
-        <div class="user-setting stack-panel" id="form-1a6b75a5">
+        <over-panel class="stack-panel" id="form-1a6b75a5">
             <section class="header-toolbar">
                 <div class="bread-crumb">
-                    <span class="fake-link" onclick="CloseSetting()">🏠</span>
+                    <span class="fake-link" data-command="display/command" data-uid="panel-settings-close">🏠</span>
                     <span>Settings</span>
                 </div>
-                <button class="icon-button" onclick="CloseSetting()">
+                <button class="icon-button" data-command="display/command" data-uid="panel-settings-close">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         viewBox="6.970975399017334 6.97014045715332 34.058985233306885 34.05888557434082">
                         <path
@@ -348,199 +76,16 @@
 
 
             </section>
-        </div>
+        </over-panel>
 
         <div class="chat-input">
             <input type="text" id="messageInput" placeholder="Write Your Message" />
-            <button onclick="PostMessage()">Send</button>
+            <button data-command="chat/command" data-uid="create">Send</button>
         </div>
-    </div>
-
-    <script>
-        const messagesEl = document.getElementById('messages');
-        const inputEl = document.getElementById('messageInput');
-        const txtSenderName = document.getElementById('sender-name');
-
-        function PostMessage() {
-            const message = inputEl.value.trim();
-            if (!message) return;
-
-            addMessage(message, 'user');
-            inputEl.value = '';
-
-            const formData = new FormData();
-            formData.append('message', message);
-            formData.append('sender', txtSenderName.innerText);
-
-            fetch("https://chat.mise.ir/", {
-                method: 'POST',
-                body: formData
-            })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === 'success') {
-                        loadMessages(); // بارگذاری پیام‌ها بعد از ارسال
-                        document.getElementById('message').value = ''; // پاک کردن ورودی پیام
-                    } else {
-                        alert(result.message);
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-
-            // شبیه‌سازی پاسخ طرف مقابل
-            setTimeout(() => {
-                addMessage('Sample Response 🤖', 'other');
-            }, 800);
-        }
-
-        function addMessage(text, type) {
-            const msg = document.createElement('div');
-            msg.className = `message ${type}`;
-            msg.innerHTML = text;
-            messagesEl.appendChild(msg);
-            messagesEl.scrollTop = messagesEl.scrollHeight;
+    </mobile-layout>
 
 
-            MessageOptimization(messagesEl);
-
-
-        }
-
-
-
-        // ارسال با Enter
-        inputEl.addEventListener('keydown', e => {
-            if (e.key === 'Enter') PostMessage();
-        });
-
-
-
-
-        fetch("https://chat.mise.ir/").then(g => g.text()).then(g => {
-            if (g.startsWith("{")) {
-
-                return;
-            }
-            addMessage(g, 'other');
-        })
-
-
-        //>> Username
-        function generateRandomUsername() {
-            // تولید یک عدد تصادفی بین 100 و 999
-            const randomNumber = Math.floor(Math.random() * 900) + 100; // این مقدار همیشه 3 رقمی خواهد بود
-            return `user-${randomNumber}`;
-        }
-
-
-        if (sessionStorage.getItem("username"))
-            txtSenderName.innerHTML = sessionStorage.getItem("username");
-        else {
-            txtSenderName.innerHTML = generateRandomUsername();
-            sessionStorage.setItem("username", txtSenderName.innerHTML)
-        }
-
-        function OpenSetting() {
-            var form = document.getElementById("form-1a6b75a5");
-            form.classList.add("active");
-
-            var input = document.getElementById("input-4eca11e2");
-            input.value = txtSenderName.innerHTML;
-            input.focus();
-            input.select();
-
-            input.oninput = () => {
-                var txt = input.value.trim();
-                txt = txt.replace(/[^a-zA-Z0-9\s]/g, '');
-                txtSenderName.innerHTML = txt;
-                if (txt.length < 3) txtSenderName.innerHTML = "user-" + txt;
-                if (txt.length == 0) txtSenderName.innerHTML = sessionStorage.getItem("username");
-                console.log(txtSenderName.innerHTML);
-            }
-
-
-
-        }
-
-        function CloseSetting() {
-            var form = document.getElementById("form-1a6b75a5");
-            form.classList.remove("active");
-
-            sessionStorage.setItem("username", txtSenderName.innerHTML);
-        }
-
-
-        function formatDate(dateString) {
-            const messageDate = new Date(dateString);
-            const today = new Date();
-
-            const messageDateString = messageDate.toISOString().split('T')[0];
-            const todayDateString = today.toISOString().split('T')[0];
-
-            const hours = messageDate.getHours().toString().padStart(2, '0');
-            const minutes = messageDate.getMinutes().toString().padStart(2, '0');
-
-            if (messageDateString === todayDateString) {
-                // If message is from today, show only hours and minutes
-                return `${hours}:${minutes}`;
-            } else {
-                // If message is from another day, show full date (MM-DD) and time
-                const month = (messageDate.getMonth() + 1).toString().padStart(2, '0');
-                const day = messageDate.getDate().toString().padStart(2, '0');
-                return `${month}-${day} ${hours}:${minutes}`;
-            }
-        }
-        function MessageOptimization(el) {
-            const messagesList = el.querySelectorAll('.message');
-
-            for (let i = 0; i < messagesList.length - 1; i++) {
-                const current = messagesList[i];
-                const next = messagesList[i + 1];
-
-                const sender1 = current.dataset.sender;
-                const sender2 = next.dataset.sender;
-
-
-                const time1 = new Date(current.querySelector('small').textContent);
-                const time2 = new Date(next.querySelector('small').textContent);
-
-
-
-
-                if (sender1 !== sender2) continue;
-                const diffMinutes = (time2 - time1) / (1000 * 60);
-
-                if (diffMinutes <= 10) {
-                    current.classList.add('merge-down');
-                    next.classList.add('merge-up');
-                }
-            }
-
-
-            el.querySelectorAll("small").forEach(small => {
-                const originalDate = small.textContent;
-                console.log(originalDate)
-                small.textContent = formatDate(originalDate);
-            });
-
-
-
-            const range = document.createRange();
-
-            messagesList.forEach(message => {
-
-                var pTag = message.querySelector("p");
-                range.selectNodeContents(pTag);
-                const contentWidth = range.getBoundingClientRect().width;
-
-                if (contentWidth < 200) {
-                    message.classList.add('compact-mode');
-                }
-            });
-
-
-        };
-    </script>
+   <script type="module" async defer src="script/index.html.js"></script>
 
 </body>
 

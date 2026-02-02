@@ -1,0 +1,126 @@
+      :root {
+            --header-bg: #6B083F;
+            --header-label-bg: #510E30;
+        }
+
+        body {
+            font-family: sans-serif;
+            background: #121212;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            height: 100svh;
+            margin: 0;
+        }
+
+    
+        .chat-messages {
+            flex: 1;
+            padding: 5px 0;
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            max-width: 80%;
+            font-size: 14px;
+            position: relative;
+
+        }
+
+        .message.user {
+            background: #e0e7ff;
+            align-self: flex-end;
+        }
+
+        .message.other {
+            background: rgba(243, 244, 246, 0.532);
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            caret-color: red;
+            background-color: #efefef;
+
+        }
+
+        .chat-input button {
+            padding: 0 15px;
+            background: #8D26B9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background: #4338ca;
+        }
+
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+
+
+        .icon-button {
+            display: flex;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+
+            svg {
+                width: 16px;
+                height: 16px;
+
+                path {
+                    fill: #efefef;
+                }
+            }
+        }
+
+
+     
+
+
+        .merge-down {
+            margin-bottom: 0;
+            border-radius: 6px 6px 0 0;
+            padding-bottom: 0;
+
+            small {
+                display: none !important;
+            }
+        }
+
+        .merge-up {
+            margin-top: 0;
+            border-radius: 0 0 6px 6px;
+            padding-top: 0;
+
+            &::before {
+                display: none !important;
+            }
+        }
+
+        .merge-middle {
+            border-radius: 0; margin-bottom: 0;  padding-bottom: 0;
+            small {
+                display: none !important;
+            }
+        }

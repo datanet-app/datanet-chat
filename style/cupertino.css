@@ -1,0 +1,66 @@
+
+        .cupertino-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            /* Rounded corners */
+            border: 1px solid #510869;
+            /* Light gray border */
+            background: #F5D8EE;
+            font-size: 16px;
+            color: #000;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .cupertino-input:focus {
+            border-color: #E1316A;
+            background-color: white;
+            /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(244, 163, 191, 0.2);
+        }
+
+        .cupertino-input::placeholder {
+            color: #8e8e93;
+            /* Light gray for placeholder */
+            opacity: 1;
+        }
+
+        /* Cupertino Button Styling */
+        .cupertino-button {
+            padding: 12px 24px;
+            /* Padding for the button */
+            font-size: 16px;
+            /* Font size */
+            color: white;
+            /* Text color */
+            background-color: #007aff;
+            /* Blue background (standard iOS blue) */
+            border: none;
+            /* No border */
+            border-radius: 20px;
+            /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow */
+            cursor: pointer;
+            /* Pointer cursor */
+            outline: none;
+            /* Remove outline */
+            transition: background-color 0.2s, transform 0.1s ease-in-out;
+            /* Transition for smooth effects */
+        }
+
+        /* Hover effect */
+        .cupertino-button:hover {
+            background-color: #0051cc;
+            /* Darker blue on hover */
+        }
+
+        /* Active effect */
+        .cupertino-button:active {
+            transform: scale(0.98);
+            /* Slight shrink when pressed */
+            background-color: #0041a3;
+            /* Even darker blue when clicked */
+        }

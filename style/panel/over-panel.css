@@ -1,0 +1,16 @@
+over-panel {
+
+    background: var(--header-bg);
+    display: none;
+
+    height: 100svh;
+
+    &.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 350px;
+        top: 0;
+        padding: 10px;
+    }
+}
