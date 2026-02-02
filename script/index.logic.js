@@ -82,7 +82,7 @@ export class IndexLogic {
         const formData = new FormData();
         formData.append('message', message);
         formData.append('sender', txtSenderName.innerText);
-        fetch("https://datanet-chat-api.onrender.com/fetch-data", {
+        fetch("https://render-cli.datanet.live/fetch-data", {
             method: 'POST',
             body: formData
         })
