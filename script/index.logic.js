@@ -3,18 +3,21 @@ import { DateFormatter } from "./lib/assistance/DateFormatter.js";
 import { IndicatorMessageElement } from "./ui/indicator/IndicatorMessageElement.js";
 import { MessageRenderer } from "./lib/gen/MessageRenderer.js";
 export class IndexLogic {
+    ConnectTry = 1;
     async DisplayLoading(currentUserName) {
         this.messagesEl.innerHTML = "";
-        this.messagesEl.innerHTML = '<div class="loading-indicator">Loading...</div>';
-        setTimeout(() => {
-            this.LoadData(currentUserName);
-            this.UpdateDisplay();
-        }, 1000);
-        return;
+        this.messagesEl.innerHTML = '<div class="loading-indicator">Connecting...</div>';
+        // setTimeout(() => {
+        //     this.LoadData(currentUserName);
+        //     this.UpdateDisplay();
+        // }, 1000);
+        // return;
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
         try {
-            const response = await fetch('https://render-cli.datanet.live', {
+            let testlink = 'https://render-cli.datanet.live';
+            //   testlink = `http://localhost:${3000}/test`;
+            const response = await fetch(testlink, {
                 signal: controller.signal // متصل کردن سیگنال قطع‌کننده به فچ
             });
             clearTimeout(timeoutId); // اگر زودتر جواب گرفتیم، تایمر ۱۰ ثانیه را ابطال کن
@@ -26,11 +29,30 @@ export class IndexLogic {
             //  console.log("Server Response:", data);
         }
         catch (error) {
-            // if (error.name === 'AbortError') {
-            //     statusText.innerText = "خطا: زمان ۱۰ ثانیه به پایان رسید و سرور پاسخ نداد.";
-            // } else {
-            //     statusText.innerText = "خطا در اتصال به سرور.";
-            // }
+            if (error.name === 'AbortError') {
+                this.messagesEl.innerHTML = `<div class="preloader red-mode">Initializing ${this.ConnectTry}/3 </div>`;
+                this.ConnectTry++;
+                if (this.ConnectTry < 4) {
+                    setTimeout(() => this.DisplayLoading(currentUserName), 7000 + (4 - this.ConnectTry) * 1000);
+                }
+                else {
+                    this.messagesEl.innerHTML = "";
+                    var m = document.createElement("div");
+                    m.classList.add("retry-dialog");
+                    m.append(document.createTextNode("Unable to Connect To Server"));
+                    var x = document.createElement("button");
+                    x.classList.add("retry-btn");
+                    x.innerHTML = "Retry";
+                    m.append(x);
+                    this.messagesEl.append(m);
+                    x.onclick = () => {
+                        top.location.reload();
+                    };
+                }
+            }
+            else {
+                this.messagesEl.innerHTML = "";
+            }
             // handleError();
         }
         // fetch("").then(g => g.text()).then(g => {

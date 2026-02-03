@@ -3,7 +3,7 @@
     color: #666;
     text-align: center;
     padding: 20px;
-
+    font-weight: 400;
 }
 
 
@@ -18,18 +18,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    min-height: 200px;
     flex-direction: column;
+    gap: 5px;
 }
 
 .loading-indicator:before {
     content: " ";
-    width: 100px;
-    height: 100px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     /* ایجاد افکت چرخش دایره */
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
+    border: 4px solid #f3f3f357;
+    border-top: 4px solid #3498db;
+
+
 
     display: flex;
     justify-content: center;
@@ -37,16 +40,24 @@
     font-size: 24px;
     font-weight: bold;
     color: #3498db;
-    position: absolute;
+
     /* اجرای همزمان دو انیمیشن: چرخش و شمارش */
     animation: spin 2s linear infinite;
 }
 
+.loading-indicator.red-mode {
+    color: #db3498;
+
+    &:before {
+        border-top: 8px solid #db3498;
+    }
+}
+
 /* نمایش عدد داخل دایره با استفاده از Counter */
 .loading-indicator::after {
-    counter-reset: num var(--num); 
+    counter-reset: num var(--num);
     content: counter(num);
-    animation:   count 60s linear forwards;
+    animation: count 60s linear forwards;
 }
 
 /* انیمیشن چرخش دایره */
