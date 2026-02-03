@@ -1,0 +1,131 @@
+message-container {
+    padding: 0 0 100px 0;
+    message-item {
+        display: flex;
+        flex-direction: column;
+        margin: 2px;
+
+        align-items: flex-start;
+
+        message-content {
+            border: 1px solid #000;
+            margin: 0 0 0 20px;
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            background-color: #000;
+            color: #efefef;
+
+            min-width: 256px;
+        }
+
+        &:has(+.no-caption) {
+            margin-bottom: 0;
+
+            message-content {
+                padding-bottom: 0;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+
+        &.no-caption {
+            margin-top: 0;
+
+            message-content {
+                padding-top: 0;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+
+        &.self-message {
+            align-items: flex-end;
+
+            message-content {
+                background-color: #16314D;
+                border-color: #16314D;
+            }
+
+        }
+
+
+        message-senderinfo {
+            display: flex;
+            gap: 0;
+            align-items: center;
+            background-color: #000;
+
+            border-radius: 0 15px 15px 0;
+            margin-top: 10px;
+            margin-left: 5px;
+            margin-bottom: 2px;
+
+            &::before {
+                content: " ";
+                width: 28px;
+                height: 28px;
+                margin: -5px;
+                border-radius: 50%;
+                background-color: black;
+                z-index: 1;
+                border-right: 1px solid #a0a0a0;
+                border-bottom: 1px solid #a0a0a0;
+            }
+
+            time {
+                padding: 0 10px;
+
+                &::before {
+                    content: " - ";
+                }
+            }
+
+            span {
+                padding: 0 5px 0 10px;
+            }
+        }
+
+        message-caption {
+            border-radius: 7px;
+            margin-top: 10px;
+            margin-right: 5px;
+            margin-bottom: 2px;
+            background-color: #16314D;
+            color: #efefef;
+            display: flex;
+            flex-direction: row-reverse;
+            padding: 2px 5px;
+
+            time {
+                &::after {
+                    content: " - ";
+                }
+            }
+
+            span {
+                padding: 0 5px;
+            }
+        }
+
+        message-caption,
+        message-senderinfo {
+            span {
+                text-transform: capitalize;
+
+                font-size: smaller;
+                order: 1;
+                color: #efefef;
+            }
+
+            time {
+                font-size: smaller;
+                color: #a0a0a0;
+
+                order: 2;
+
+            }
+        }
+    }
+}

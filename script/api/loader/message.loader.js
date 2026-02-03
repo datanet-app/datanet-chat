@@ -1,12 +1,16 @@
 export class MessageLoader {
-    OnLoadstring;
+    OnLoadComplete;
+    ServerUrl;
+    constructor() {
+        this.ServerUrl = "https://render-cli.datanet.live/fetch-data";
+        this.ServerUrl = "http://localhost:8000";
+    }
     Load() {
-        fetch("https://render-cli.datanet.live/fetch-data").then(g => g.text()).then(g => {
-            if (g.startsWith("{")) {
-                return;
-            }
-            if (this.OnLoadstring)
-                this.OnLoadstring(g);
+        fetch(this.ServerUrl).then(g => g.text()).then(g => {
+            if (this.OnLoadComplete)
+                this.OnLoadComplete(g);
         });
+    }
+    Send() {
     }
 }

@@ -1,9 +1,8 @@
 import { IndexLogic } from "./index.logic.js";
 import { CommandClass } from "./lib/command/CommandClass.js";
 import { CommandRoute } from "./lib/command/CommandRoute.js";
-import { IndicatorMessageElement } from "./ui/indicator/IndicatorMessageElement.js";
 //>> Components
-const messagesEl = document.getElementById('messages');
+const messagesEl = document.querySelector('message-container');
 const inputEl = document.getElementById('messageInput');
 const txtSenderName = document.getElementById('sender-name');
 //>> Define
@@ -27,8 +26,6 @@ document.querySelectorAll("[data-action]").forEach(el => {
 //>> Constructor
 const Logic = new IndexLogic();
 Logic.messagesEl = messagesEl;
-Logic.LoadData();
-Logic.UpdateDisplay();
 function ActionRequest_Handler(route) {
     route.On("chat/command", "create", () => Logic.PostMessage(inputEl, txtSenderName));
     route.On("display/command", "panel-settings-open", () => {
@@ -71,3 +68,4 @@ else {
     txtSenderName.innerHTML = generateRandomUsername();
     sessionStorage.setItem("username", txtSenderName.innerHTML);
 }
+Logic.DisplayLoading(txtSenderName.innerText);
