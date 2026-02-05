@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chat</title>
+    <link rel="stylesheet" href="/style/style.css">
+    <style>
+        mobile-layout {
+            gap: 10px;
+            /* background-color: #121212;
+            color: #efefef; */
+            height: 100vh;
+
+            mobile-content {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                overflow-y: scroll;
+                padding-bottom: 40px;
+            }
+        }
+
+        .company-contact {
+            background-color: transparent;
+            border: none;
+            width: 100%;
+            max-height: 128px;
+            min-height: 84px;
+            background-color: rebeccapurple;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-evenly;
+
+
+
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="7.099999904632568 9.390000343322754 304.00000619888306 168.64999294281006"><path fill="none" stroke="%231E96BE" stroke-width="4" d="M253.36,9.39l57.74,70-76,98.65h-152l-76-98.65,57.73-70"></path></svg>');
+
+            background-repeat: no-repeat;
+            background-size: 70%;
+
+            background-position: center;
+
+            svg {
+                width: auto;
+                height: auto;
+                max-height: 48px;
+
+                path {
+                    fill: #17779A;
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #36363648;
+                justify-content: center;
+                transition: 500ms;
+
+                svg {
+                    path {
+                        fill: #1E96BE;
+                    }
+                }
+            }
+        }
+
+        .wrapper {
+            display: flex;
+            gap: 1px;
+            margin: 0 5px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 1rem;
+            padding: 5px 10px;
+            margin: 0 10px;
+            border-bottom: 1px solid #707070;
+        }
+
+        .squire-button {
+            aspect-ratio: 1/1;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <mobile-layout>
+        <mobile-header>
+            <div class="chat-header header-toolbar fixed">
+                <div>
+                    chat: <span id="sender-name">----</span>
+                </div>
+                <button class="icon-button" data-command="display/command" data-uid="panel-settings-open">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="4.954591751098633 4.001092910766602 38.09081840515137 39.9989070892334">
+                        <path
+                            d="M39.139,26.282C38.426,25.759,38,24.919,38,24.034s0.426-1.725,1.138-2.247l3.294-2.415c0.525-0.386,0.742-1.065,0.537-1.684c-0.848-2.548-2.189-4.872-3.987-6.909c-0.433-0.488-1.131-0.642-1.728-0.38l-3.709,1.631c-0.808,0.356-1.749,0.305-2.516-0.138c-0.766-0.442-1.28-1.23-1.377-2.109l-0.446-4.072c-0.071-0.648-0.553-1.176-1.191-1.307c-2.597-0.531-5.326-0.54-7.969-0.01c-0.642,0.129-1.125,0.657-1.196,1.308l-0.442,4.046c-0.097,0.88-0.611,1.668-1.379,2.11c-0.766,0.442-1.704,0.495-2.515,0.138l-3.729-1.64c-0.592-0.262-1.292-0.11-1.725,0.377c-1.804,2.029-3.151,4.35-4.008,6.896c-0.208,0.618,0.008,1.301,0.535,1.688l3.273,2.4C9.574,22.241,10,23.081,10,23.966s-0.426,1.725-1.138,2.247l-3.294,2.415c-0.525,0.386-0.742,1.065-0.537,1.684c0.848,2.548,2.189,4.872,3.987,6.909c0.433,0.489,1.133,0.644,1.728,0.38l3.709-1.631c0.808-0.356,1.748-0.305,2.516,0.138c0.766,0.442,1.28,1.23,1.377,2.109l0.446,4.072c0.071,0.648,0.553,1.176,1.191,1.307C21.299,43.864,22.649,44,24,44c1.318,0,2.648-0.133,3.953-0.395c0.642-0.129,1.125-0.657,1.196-1.308l0.443-4.046c0.097-0.88,0.611-1.668,1.379-2.11c0.766-0.441,1.705-0.493,2.515-0.138l3.729,1.64c0.594,0.263,1.292,0.111,1.725-0.377c1.804-2.029,3.151-4.35,4.008-6.896c0.208-0.618-0.008-1.301-0.535-1.688L39.139,26.282z M24,31c-3.866,0-7-3.134-7-7s3.134-7,7-7s7,3.134,7,7S27.866,31,24,31z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </mobile-header>
+
+
+
+        <mobile-content>
+
+            <stack-panel>
+
+                <h2> Recently Opened ..</h2>
+
+                <contact-container class="wrapper">
+                    <button class="squire-button company-contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="3 4.999849319458008 42 38.00015068054199">
+
+                            <path
+                                d="M5.5 5 A 1.50015 1.50015 0 1 0 5.5 8L6 8L6 20.039062C4.31 20.279063 3 21.74 3 23.5L3 34.5C3 35.33 3.67 36 4.5 36L20 36L20 34.5L20 33L20 26L17 26C16.448 26 16 26.448 16 27L16 33L6 33L6 23.5C6 23.22 6.22 23 6.5 23L7.5 23C8.33 23 9 22.33 9 21.5L9 8L28 8L28 17L31 17L31 8L31.5 8 A 1.50015 1.50015 0 1 0 31.5 5L5.5 5 z M14 12C13.448 12 13 12.448 13 13L13 15C13 15.552 13.448 16 14 16L16 16C16.552 16 17 15.552 17 15L17 13C17 12.448 16.552 12 16 12L14 12 z M21 12C20.448 12 20 12.448 20 13L20 15C20 15.552 20.448 16 21 16L23 16C23.552 16 24 15.552 24 15L24 13C24 12.448 23.552 12 23 12L21 12 z M14 19C13.448 19 13 19.448 13 20L13 22C13 22.552 13.448 23 14 23L16 23C16.552 23 17 22.552 17 22L17 20C17 19.448 16.552 19 16 19L14 19 z M26.5 19C24.025 19 22 21.025 22 23.5L22 41.5C22 42.328 22.672 43 23.5 43L43.5 43C44.328 43 45 42.328 45 41.5L45 23.5C45 21.025 42.975 19 40.5 19L26.5 19 z M26.5 22L40.5 22C41.328 22 42 22.672 42 23.5L42 40L25 40L25 23.5C25 22.672 25.672 22 26.5 22 z M10 26C9.448 26 9 26.448 9 27L9 29C9 29.552 9.448 30 10 30L12 30C12.552 30 13 29.552 13 29L13 27C13 26.448 12.552 26 12 26L10 26 z M29 26C28.448 26 28 26.448 28 27L28 29C28 29.552 28.448 30 29 30L31 30C31.552 30 32 29.552 32 29L32 27C32 26.448 31.552 26 31 26L29 26 z M36 26C35.448 26 35 26.448 35 27L35 29C35 29.552 35.448 30 36 30L38 30C38.552 30 39 29.552 39 29L39 27C39 26.448 38.552 26 38 26L36 26 z M29 33C28.448 33 28 33.448 28 34L28 36C28 36.552 28.448 37 29 37L31 37C31.552 37 32 36.552 32 36L32 34C32 33.448 31.552 33 31 33L29 33 z M36 33C35.448 33 35 33.448 35 34L35 36C35 36.552 35.448 37 36 37L38 37C38.552 37 39 36.552 39 36L39 34C39 33.448 38.552 33 38 33L36 33 z">
+                            </path>
+                        </svg>
+                        <span>Company</span>
+                    </button>
+                    <button class="squire-button company-contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="3.5 5.5 41.0859375 37.5">
+                            <path
+                                d="M13 5.5C11 5.5 9.2474045 6.3220112 8.1308594 7.578125C7.0143142 8.8342388 6.5 10.430556 6.5 12C6.5 13.569444 7.0143142 15.165761 8.1308594 16.421875C9.2474045 17.677989 11 18.5 13 18.5C15 18.5 16.752595 17.677989 17.869141 16.421875C18.985686 15.165761 19.5 13.569444 19.5 12C19.5 10.430556 18.985686 8.8342388 17.869141 7.578125C16.752595 6.3220112 15 5.5 13 5.5 z M35 5.5C33 5.5 31.247405 6.3220112 30.130859 7.578125C29.014314 8.8342388 28.5 10.430556 28.5 12C28.5 13.569444 29.014314 15.165761 30.130859 16.421875C31.247405 17.677989 33 18.5 35 18.5C37 18.5 38.752595 17.677989 39.869141 16.421875C40.985686 15.165761 41.5 13.569444 41.5 12C41.5 10.430556 40.985686 8.8342388 39.869141 7.578125C38.752595 6.3220112 37 5.5 35 5.5 z M13 9.5C13.999999 9.5 14.497405 9.8029888 14.880859 10.234375C15.264314 10.665761 15.5 11.319444 15.5 12C15.5 12.680556 15.264314 13.334239 14.880859 13.765625C14.497405 14.197011 13.999999 14.5 13 14.5C12.000001 14.5 11.502595 14.197011 11.119141 13.765625C10.735686 13.334239 10.5 12.680556 10.5 12C10.5 11.319444 10.735686 10.665761 11.119141 10.234375C11.502595 9.8029888 12.000001 9.5 13 9.5 z M35 9.5C35.999999 9.5 36.497405 9.8029888 36.880859 10.234375C37.264314 10.665761 37.5 11.319444 37.5 12C37.5 12.680556 37.264314 13.334239 36.880859 13.765625C36.497405 14.197011 35.999999 14.5 35 14.5C34.000001 14.5 33.502595 14.197011 33.119141 13.765625C32.735686 13.334239 32.5 12.680556 32.5 12C32.5 11.319444 32.735686 10.665761 33.119141 10.234375C33.502595 9.8029888 34.000001 9.5 35 9.5 z M24 17 A 6 6 0 0 0 24 29 A 6 6 0 0 0 24 17 z M7.3789062 20.5C5.2409063 20.5 3.5 22.104219 3.5 24.074219L3.5 28.042969C3.5 31.676969 9.32575 33.195625 13.09375 33.515625C13.41575 31.745625 14.584969 30.270391 16.167969 29.525391C15.642969 29.558391 15.105969 29.582031 14.542969 29.582031C11.320969 29.582031 8.213 28.462438 7.5 27.773438L7.5 24.5L16.152344 24.505859C16.057344 24.016859 16 23.516 16 23C16 22.126 16.14625 21.288 16.40625 20.5L7.3789062 20.5 z M31.595703 20.5C31.854703 21.288 32 22.126 32 23C32 23.515 31.941656 24.015906 31.847656 24.503906L40.583984 24.509766L40.583984 27.773438C39.871984 28.461437 36.764969 29.583984 33.542969 29.583984C32.938969 29.583984 32.354156 29.550906 31.785156 29.503906C33.394156 30.242906 34.584203 31.732437 34.908203 33.523438C38.673203 33.219437 44.585938 31.703969 44.585938 28.042969L44.585938 24.074219C44.583937 22.103219 42.843078 20.5 40.705078 20.5L31.595703 20.5 z M18.5 31C16.57 31 15 32.57 15 34.5L15 37C15 40.364 18.953 43 24 43C29.047 43 33 40.364 33 37L33 34.5C33 32.57 31.43 31 29.5 31L18.5 31 z">
+                            </path>
+                        </svg>
+                        <span>Group</span>
+                    </button>
+
+
+                    <button class="squire-button company-contact">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 42 42">
+                            <path
+                                d="M39.5 2C36.169527 2 33 4.7334595 33 8.5 A 1.50015 1.50015 0 1 0 36 8.5C36 6.4685405 37.860473 5 39.5 5C41.139527 5 43 6.4685405 43 8.5C43 9.3717105 42.770401 9.9055219 42.351562 10.478516C41.932725 11.051509 41.27997 11.621088 40.525391 12.265625C39.016232 13.554698 37 15.4 37 18.5 A 1.50015 1.50015 0 1 0 40 18.5C40 16.6 40.983768 15.820302 42.474609 14.546875C43.22003 13.910162 44.067275 13.214116 44.773438 12.248047C45.479599 11.281978 46 10.003289 46 8.5C46 4.7334595 42.830473 2 39.5 2 z M20 4C14.494917 4 10 8.494921 10 14C10 19.505079 14.494917 24 20 24C25.505083 24 30 19.505079 30 14C30 8.494921 25.505083 4 20 4 z M20 7C23.883764 7 27 10.116238 27 14C27 17.883762 23.883764 21 20 21C16.116236 21 13 17.883762 13 14C13 10.116238 16.116236 7 20 7 z M38.5 22 A 2.5 2.5 0 0 0 38.5 27 A 2.5 2.5 0 0 0 38.5 22 z M7.9785156 28C5.7987048 28 4 29.798705 4 31.978516L4 33.5C4 37.104167 6.2792701 39.892227 9.3066406 41.5625C12.334011 43.232773 16.168103 44 20 44C23.831897 44 27.665989 43.232773 30.693359 41.5625C33.274641 40.138345 35.217335 37.862616 35.761719 35L36.001953 35L36.001953 31.978516C36.001953 29.798705 34.201295 28 32.021484 28L7.9785156 28 z M7.9785156 31L32.021484 31C32.579674 31 33.001953 31.420326 33.001953 31.978516L33.001953 32L33 32L33 33.5C33 35.895833 31.65427 37.607773 29.244141 38.9375C26.834011 40.267227 23.418103 41 20 41C16.581897 41 13.165989 40.267227 10.755859 38.9375C8.3457303 37.607773 7 35.895833 7 33.5L7 31.978516C7 31.420326 7.4203264 31 7.9785156 31 z">
+                            </path>
+                        </svg>
+                        <span>Support</span>
+                    </button>
+
+                </contact-container>
+
+                <h2> Contact List ..</h2>
+
+                <style>
+                    contact-list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        padding: 0 5px;
+                    }
+
+                    contact-item {
+                        margin: 0 10px;
+                        display: flex;
+ 
+                        gap: 10px;
+                        padding: 5px;
+
+                        img {
+                            width: 48px;
+                            border-radius: 50%;
+                            filter: drop-shadow(0 0 0.75rem #36363648);
+                            border: none;
+                            border-right: 2px solid #36363648;
+                            border-bottom: 2px solid #36363648;
+                            aspect-ratio: 1/1;
+                            object-fit: cover;
+                        }
+
+                        h3 {
+                            margin: 0;
+                        }
+
+                        .contact-info {
+                            flex-grow: 1;
+                            h3{
+                                font-size: 0.9rem;
+                            }
+                            P{
+                                margin: 0;
+                                color: #707070;
+                                font-size: 0.75rem;
+                            }
+                        }
+
+                        .message-info {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-end;
+                            gap: 5px;
+
+                            span {
+                                font-size: 0.75rem;
+                                color: #707070;
+                            }
+
+                            p {
+                                margin: 0;
+                                background-color: #36363648;
+                                padding: 2px 5px;
+                                border-radius: 10px;
+                                font-size: 0.75rem;
+                                color: #efefef;
+                                min-width: 20px;
+                                text-align: center;
+                            }
+                        }
+                    }
+                </style>
+
+
+                <contact-list></contact-list>
+
+
+
+            </stack-panel>
+        </mobile-content>
+        <script>
+
+            var list = document.querySelector("contact-list");
+
+            [
+                {
+                    "profile": "1.jpg",
+                    "name": "Alice",
+                    "id": "user_001",
+                    "last_message": "Hey, how are you?",
+                    "last_message_time": "2026-02-05 14:30",
+                    "unread_count": 3,
+                    "type": "personal"
+                },
+                {
+                    "profile": "2.webp",
+                    "name": "Bob",
+                    "id": "user_002",
+                    "last_message": "I will send the file soon.",
+                    "last_message_time": "2026-02-05 13:45",
+                    "unread_count": 0,
+                    "type": "personal"
+                },
+                {
+                    "profile": "3.jfif",
+                    "name": "Charlie",
+                    "id": "user_003",
+                    "last_message": "Let's meet tomorrow at 5 PM.",
+                    "last_message_time": "2026-02-04 19:00",
+                    "unread_count": 1,
+                    "type": "personal"
+                },
+                {
+                    "profile": "4.webp",
+                    "name": "David",
+                    "id": "group_001",
+                    "last_message": "Check the new group task.",
+                    "last_message_time": "2026-02-05 15:00",
+                    "unread_count": 5,
+                    "type": "group"
+                },
+                {
+                    "profile": "5.png",
+                    "name": "Eve",
+                    "id": "user_004",
+                    "last_message": "Let's grab lunch tomorrow.",
+                    "last_message_time": "2026-02-03 12:30",
+                    "unread_count": 0,
+                    "type": "personal"
+                },
+                {
+                    "profile": "6.webp",
+                    "name": "Frank",
+                    "id": "group_002",
+                    "last_message": "Reminder: Project deadline is coming.",
+                    "last_message_time": "2026-02-05 11:15",
+                    "unread_count": 2,
+                    "type": "group"
+                },
+                {
+                    "profile": "7.avif",
+                    "name": "Grace",
+                    "id": "user_005",
+                    "last_message": "Are you free for a call?",
+                    "last_message_time": "2026-02-04 10:45",
+                    "unread_count": 0,
+                    "type": "personal"
+                },
+                {
+                    "profile": "8.avif",
+                    "name": "Alice",
+                    "id": "group_003",
+                    "last_message": "Meeting at 3 PM tomorrow.",
+                    "last_message_time": "2026-02-05 16:00",
+                    "unread_count": 4,
+                    "type": "group"
+                }, {
+                    "profile": "9.png",
+                    "name": "Alice",
+                    "id": "group_004",
+                    "last_message": "Sample test Message.",
+                    "last_message_time": "2026-02-05 16:00",
+                    "unread_count": 4,
+                    "type": "group"
+                },
+            ]
+                .forEach((img, i) => {
+                    list.appendChild(Object.assign(document.createElement("contact-item"), {
+                        innerHTML: `
+                    <section>
+                        <img src="/assets/profile/${img.profile}">
+                    </section>
+                    <section class="contact-info">
+                        <h3>${img.name}</h3>
+                        <p> ${img.last_message}</p>
+                    </section>
+                     <section class="message-info">
+                        <span>${formatLastMessageTime(img.last_message_time)}</span>
+                        <p> ${img.unread_count}</p>
+                    </section>
+                `
+                    }));
+                })
+
+            function formatLastMessageTime(lastMessageDate) {
+                const now = new Date();
+                const messageDate = new Date(lastMessageDate);
+
+                // بررسی اینکه پیام امروز بوده یا نه
+                const isToday = messageDate.toDateString() === now.toDateString();
+
+                // فاصله زمانی بین پیام و حالا
+                const diffInTime = now - messageDate;
+
+                // بررسی اینکه پیام تا یک هفته قبل بوده یا نه
+                const oneWeek = 7 * 24 * 60 * 60 * 1000;  // 7 روز به میلی‌ثانیه
+                const isWithinOneWeek = diffInTime <= oneWeek;
+
+                // اگر پیام امروز بود
+                if (isToday) {
+                    const hours = messageDate.getHours();
+                    const minutes = messageDate.getMinutes();
+                    const period = hours >= 12 ? 'PM' : 'AM';
+                    const formattedTime = `${((hours + 11) % 12 + 1)}:${minutes.toString().padStart(2, '0')} ${period}`;
+                    return formattedTime;
+                }
+
+                // اگر پیام تا یک هفته قبل بوده باشد
+                if (isWithinOneWeek) {
+                    const options = { weekday: 'short' };
+                    const weekday = new Intl.DateTimeFormat('en-US', options).format(messageDate).toLowerCase();
+                    return weekday;
+                }
+
+                // اگر پیام قدیمی‌تر از یک هفته باشد
+                const options = { month: 'short', day: 'numeric' };
+                const formattedDate = new Intl.DateTimeFormat('en-US', options).format(messageDate);
+                const year = messageDate.getFullYear().toString().slice(-2);
+                const monthDayYear = `${formattedDate} ${year}`;
+                return monthDayYear;
+            }
+
+
+        </script>
+
+        <over-panel class="stack-panel" id="form-1a6b75a5">
+            <section class="header-toolbar">
+                <div class="bread-crumb">
+                    <span class="fake-link" data-command="display/command" data-uid="panel-settings-close">🏠</span>
+                    <span>Settings</span>
+                </div>
+                <button class="icon-button" data-command="display/command" data-uid="panel-settings-close">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        viewBox="6.970975399017334 6.97014045715332 34.058985233306885 34.05888557434082">
+                        <path
+                            d="M38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375L24 21.171875L10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062L21.171875 24L7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062L24 26.828125L37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938L26.828125 24L40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z">
+                        </path>
+                    </svg>
+                </button>
+            </section>
+            <section>
+
+                <label>
+
+                    <span>Username</span>
+                    <input type="text" class="cupertino-input" id="input-4eca11e2" placeholder="UserName" />
+                </label>
+
+
+            </section>
+        </over-panel>
+
+
+    </mobile-layout>
+
+
+    <script type="module" async defer src="/script/pages/contact-list/index.js"></script>
+
+</body>
+
+</html>

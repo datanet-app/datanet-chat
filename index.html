@@ -1,95 +1,20 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat</title>
-    <link rel="stylesheet" href="./style/index.css">
-    <link rel="stylesheet" href="./style/element/form/label.css">
-    <link rel="stylesheet" href="./style/element/define/indicator-message-element.css">
-    <link rel="stylesheet" href="./style/cupertino.css">
-    <link rel="stylesheet" href="./style/setting.css">
-    <link rel="stylesheet" href="./style/header-toolbar.css">
-    <link rel="stylesheet" href="./style/panel/over-panel.css">
-    <link rel="stylesheet" href="./style/layout/mobile-layout.css">
-    <link rel="stylesheet" href="./style/states/loading-indicator.css">
-    <link rel="stylesheet" href="./style/states/preloader.css">
-    <link rel="stylesheet" href="./style/element/define/message-item.css">
-    <style>
-        input-area {
-            height: 40px;
-            width: 100%;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            left: 0;
-            display: flex;
-            background-color: rgba(255, 0, 0, 0.293);
-            color: #efefef;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <title>Document</title>
+    <link rel="stylesheet" href="./style/style.css">
 </head>
 
 <body>
- 
     <mobile-layout>
-        <div class="chat-header header-toolbar">
-            <div>
-                chat: <span id="sender-name">----</span>
-            </div>
-            <button class="icon-button"  data-command="display/command" data-uid="panel-settings-open" >
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="4.954591751098633 4.001092910766602 38.09081840515137 39.9989070892334">
-                    <path
-                        d="M39.139,26.282C38.426,25.759,38,24.919,38,24.034s0.426-1.725,1.138-2.247l3.294-2.415c0.525-0.386,0.742-1.065,0.537-1.684c-0.848-2.548-2.189-4.872-3.987-6.909c-0.433-0.488-1.131-0.642-1.728-0.38l-3.709,1.631c-0.808,0.356-1.749,0.305-2.516-0.138c-0.766-0.442-1.28-1.23-1.377-2.109l-0.446-4.072c-0.071-0.648-0.553-1.176-1.191-1.307c-2.597-0.531-5.326-0.54-7.969-0.01c-0.642,0.129-1.125,0.657-1.196,1.308l-0.442,4.046c-0.097,0.88-0.611,1.668-1.379,2.11c-0.766,0.442-1.704,0.495-2.515,0.138l-3.729-1.64c-0.592-0.262-1.292-0.11-1.725,0.377c-1.804,2.029-3.151,4.35-4.008,6.896c-0.208,0.618,0.008,1.301,0.535,1.688l3.273,2.4C9.574,22.241,10,23.081,10,23.966s-0.426,1.725-1.138,2.247l-3.294,2.415c-0.525,0.386-0.742,1.065-0.537,1.684c0.848,2.548,2.189,4.872,3.987,6.909c0.433,0.489,1.133,0.644,1.728,0.38l3.709-1.631c0.808-0.356,1.748-0.305,2.516,0.138c0.766,0.442,1.28,1.23,1.377,2.109l0.446,4.072c0.071,0.648,0.553,1.176,1.191,1.307C21.299,43.864,22.649,44,24,44c1.318,0,2.648-0.133,3.953-0.395c0.642-0.129,1.125-0.657,1.196-1.308l0.443-4.046c0.097-0.88,0.611-1.668,1.379-2.11c0.766-0.441,1.705-0.493,2.515-0.138l3.729,1.64c0.594,0.263,1.292,0.111,1.725-0.377c1.804-2.029,3.151-4.35,4.008-6.896c0.208-0.618-0.008-1.301-0.535-1.688L39.139,26.282z M24,31c-3.866,0-7-3.134-7-7s3.134-7,7-7s7,3.134,7,7S27.866,31,24,31z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-
-        <message-container></message-container>
-
-
-
-
-        <over-panel class="stack-panel" id="form-1a6b75a5">
-            <section class="header-toolbar">
-                <div class="bread-crumb">
-                    <span class="fake-link" data-command="display/command" data-uid="panel-settings-close">🏠</span>
-                    <span>Settings</span>
-                </div>
-                <button class="icon-button" data-command="display/command" data-uid="panel-settings-close">
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        viewBox="6.970975399017334 6.97014045715332 34.058985233306885 34.05888557434082">
-                        <path
-                            d="M38.982422 6.9707031 A 2.0002 2.0002 0 0 0 37.585938 7.5859375L24 21.171875L10.414062 7.5859375 A 2.0002 2.0002 0 0 0 8.9785156 6.9804688 A 2.0002 2.0002 0 0 0 7.5859375 10.414062L21.171875 24L7.5859375 37.585938 A 2.0002 2.0002 0 1 0 10.414062 40.414062L24 26.828125L37.585938 40.414062 A 2.0002 2.0002 0 1 0 40.414062 37.585938L26.828125 24L40.414062 10.414062 A 2.0002 2.0002 0 0 0 38.982422 6.9707031 z">
-                        </path>
-                    </svg>
-                </button>
-            </section>
-            <section>
-
-                <label>
-                    <span>Username</span>
-                    <input type="text" class="cupertino-input" id="input-4eca11e2" placeholder="UserName" />
-                </label>
-
-
-            </section>
-        </over-panel>
-
-        <div class="chat-input">
-            <input type="text" id="messageInput" placeholder="Write Your Message" />
-            <button data-command="chat/command" data-uid="create">Send</button>
-        </div>
+        <header-container></header-container>
+        <action-container></action-container>
+        <dialog-container></dialog-container>
     </mobile-layout>
-
-
-   <script type="module" async defer src="script/index.html.js"></script>
-
+ 
+    <script type="module" src="./script/pages/index.js"></script>
 </body>
-
 </html>

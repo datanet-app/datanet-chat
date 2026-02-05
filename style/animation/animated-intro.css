@@ -1,0 +1,42 @@
+.animated-intro {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: showFeature 1s forwards;
+}
+
+.feature-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: showFeature 0.5s forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes showFeature {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.grow-animation {
+    width: 0;
+    animation: GrowLineKeyFrame 2s forwards;
+}
+
+@keyframes GrowLineKeyFrame {
+    to {
+        width: 100%;
+    }
+}

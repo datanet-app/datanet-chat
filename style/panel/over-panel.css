@@ -12,5 +12,6 @@ over-panel {
         width: 350px;
         top: 0;
         padding: 10px;
+        z-index: 10000;
     }
 }
